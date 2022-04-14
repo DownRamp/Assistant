@@ -58,7 +58,7 @@ def password():
        password = password + x
       
    date = datetime.datetime.now()
-   f= open("secrets.txt","a+")
+   f= open("secrets.txt", "a+")
    f.write(reason +" "+str(date)+" "+password)
    f.close()
  
