@@ -1,0 +1,1 @@
+pip install -r {The project you want to run}.txt
