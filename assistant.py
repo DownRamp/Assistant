@@ -2,6 +2,20 @@ import logging
 from pathlib import Path
 from tkinter import *
 from tkinter import ttk
+from pysondb import db
+from datetime import date
+import os
+import email
+import clocks
+import clothing
+import cold_storage
+import date_night
+import investing
+import password_gen
+import therapy
+import hypnosis
+import workout
+import ebook_audiobook
 
 
 class Assistant:
@@ -9,80 +23,63 @@ class Assistant:
     @staticmethod
     def initialize():
         logging.debug("initializing")
-        file = "filing_system/boss.txt"
+        file = "filing_system/boss.json"
         my_file = Path(file)
         if my_file.exists():
-            f = open(file, "r")
-            return f.read()
+            b = db.getDb("filing_system/boss.json")
+            return b.getAll()[0]["name"]
         else:
             boss = input("Please enter your name: ")
-            f = open(file, "w")
-            f.write(boss)
+            b = db.getDb("filing_system/boss.json")
+            b.add({"name": boss})
             return boss
 
     @staticmethod
+    def check_events():
+        logging.debug("Cleaning Schedule")
+        events = db.getDb("Events/events.json")
+        return events.getAll()
+
+    @staticmethod
     def add_event(action):
+        today = date.today()
+        day = today.strftime("%b-%d-%Y")
+
         logging.debug("Event created")
-        file = "filing_system/events.txt"
-        my_file = Path(file)
-        if my_file.exists():
-            f = open(file, "a")
-            f.write(action)
-        else:
-            return []
+        events = db.getDb("Events/events.json")
+        events.add({"name": action, "time": day})
 
     @staticmethod
     def check_chores():
         chores = []
         logging.debug("Events checked")
-        file = "Chores/daily.txt"
-        my_file = Path(file)
-        if my_file.exists():
-            f = open(file, "r")
-            f.read().split(',')
-        file = "Chores/weekly.txt"
-        my_file = Path(file)
-        if my_file.exists():
-            f = open(file, "r")
-            f.read().split(',')
-        file = "Chores/monthly.txt"
-        my_file = Path(file)
-        if my_file.exists():
-            f = open(file, "r")
-            f.read().split(',')
-        file = "Chores/quarterly.txt"
-        my_file = Path(file)
-        if my_file.exists():
-            f = open(file, "r")
-            f.read().split(',')
-        file = "Chores/yearly.txt"
-        my_file = Path(file)
-        if my_file.exists():
-            f = open(file, "r")
-            f.read().split(',')
+        chores.append(db.getDb("Chores/daily.json").getAll())
+        chores.append(db.getDb("Chores/weekly.json").getAll())
+        chores.append(db.getDb("Chores/monthly.json").getAll())
+        chores.append(db.getDb("Chores/quarterly.json").getAll())
+        chores.append(db.getDb("Chores/yearly.json").getAll())
+        return chores
+
+    @staticmethod
+    def send_email():
+        email.email()
 
     @staticmethod
     def create_google_event():
         logging.debug("Google calendar event created")
 
+
     @staticmethod
     def fetch_google_event():
         logging.debug("Google calendar event created")
 
-    @staticmethod
-    def check_events():
-        logging.debug("Cleaning Schedule")
-        file = "filing_system/events.txt"
-        my_file = Path(file)
-        if my_file.exists():
-            f = open(file, "r")
-            return f.read().split(',')
-        else:
-            return []
 
     @staticmethod
-    def find_file():
+    def find_file(name, path):
         logging.debug("Looking for file")
+        for root, dirs, files in os.walk(path):
+            if name in files:
+                return os.path.join(root, name)
 
     # Additional features
 

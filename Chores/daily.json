@@ -1,0 +1,29 @@
+{
+   "data": [
+      {
+         "name": "make bed",
+         "time": "8:00 am",
+         "id": 271520746489223524
+      },
+      {
+         "name": "sweep kitchen floors",
+         "time": "8:30 am",
+         "id": 924168498464059469
+      },
+      {
+         "name": "wipe down kitchen and bathroom",
+         "time": "10:00 am",
+         "id": 171597705943327905
+      },
+      {
+         "name": "squeegee shower",
+         "time": "1:00 pm",
+         "id": 323606792473122873
+      },
+      {
+         "name": "sanitize kitchen and bathroom sinks",
+         "time": "6:00 pm",
+         "id": 422087352687065718
+      }
+   ]
+}

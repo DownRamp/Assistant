@@ -3,10 +3,12 @@ import soundfile as sf
 import sys
 from scipy.io.wavfile import write
 
+
 def instructions():
     print("Music selection:")
     print("1 - Flowing Stream")
     print("2 - Lake noises")
+
 
 def play_song(selection,repeats):
     filename1 = "music/Flowing-Stream-1.wav"
@@ -29,20 +31,21 @@ def play_song(selection,repeats):
 
     print("End of track")
 
+
 def record():
     fs = 44100
     seconds = 3
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
     sd.wait()
     write('output.wav', fs, myrecording)
-    
+
+
 if __name__ == '__main__':
     instructions()
     selection = input("Input selection: ")
     repeats = input("Amount of repeats: ")
     try:
-        play_song(int(selection),int(repeats))
-    
+        play_song(int(selection), int(repeats))
     except:
         print("Incorrect input caused error:"+e)
         sys.exit
