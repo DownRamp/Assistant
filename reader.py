@@ -7,6 +7,7 @@ from tkinter import *
 import PyPDF2
 from os.path import exists
 
+# https://www.samuelthomasdavies.com/book-summaries/
 
 class EbookToAudio:
 
@@ -76,7 +77,6 @@ class EbookToAudio:
         engine.setProperty('voice', voices[7].id)
         engine.say("Hello Reader!")
         engine.runAndWait()
-        engine.stop()
         root.title("Audio from ebook")
 
         root.geometry("350x100")
@@ -87,3 +87,5 @@ class EbookToAudio:
         stop = Button(root, text="Stop", command=save_point)
         stop.pack()
         root.mainloop()
+        engine.stop()
+

@@ -8,7 +8,7 @@ a.addMany([{"name": "Workout", "time": "Jul-1"},
            {"name": "self-employed last date taxes", "time": "Jun-15th"},
            ])
 
-b = db.getDb("filing_system/boss.json")
+b = db.getDb("Boss/boss.json")
 b.add({"name": "Daniel"})
 
 c = db.getDb("Chores/daily.json")

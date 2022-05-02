@@ -13,6 +13,22 @@ from googleapiclient.errors import HttpError
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
+# Add events
+def add_event():
+    print()
+
+# update events
+def update_event():
+    print()
+
+# check google events
+def check_google():
+    print()
+
+# update google events
+def update_google():
+    print()
+
 def main():
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.

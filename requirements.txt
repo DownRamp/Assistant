@@ -1,0 +1,8 @@
+streamlit
+pandas
+plotly
+psycopg2
+requests
+tweepy
+numpy
+py-bcrypt

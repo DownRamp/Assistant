@@ -10,7 +10,7 @@ def instructions():
     print("2 - Lake noises")
 
 
-def play_song(selection,repeats):
+def play_song(selection, repeats):
     filename1 = "music/Flowing-Stream-1.wav"
     filename2 = "music/St-Marys-Loch.wav"
     filename = ""
@@ -47,5 +47,5 @@ if __name__ == '__main__':
     try:
         play_song(int(selection), int(repeats))
     except:
-        print("Incorrect input caused error:"+e)
+        print("Incorrect input caused error")
         sys.exit
