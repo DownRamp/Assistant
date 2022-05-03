@@ -40,33 +40,32 @@
       ],
       "responses": [
         "Why do you think that is?",
-        "Why don't you ",
-
+        "Could you tell me about another time you felt like this?"
       ]
     },
     {
       "tag": "angry",
       "patterns": [
-        "",
-        "",
-        "",
-        ""
+        "Mad",
+        "Pissed",
+        "Upset",
+        "Angry"
       ],
       "responses": [
-        "",
-        ""
+        "What's causing this emotion?",
+        "Its okay to be mad"
       ]
     },
     {
       "tag": "lonely",
       "patterns": [
-        "",
-        "",
-        "When do I get my delivery?"
+        "No one",
+        "alone",
+        "lonely"
       ],
       "responses": [
-        "Delivery takes 2-4 days",
-        "Shipping takes 2-4 days"
+        "It's okay to be alone sometimes",
+        "Why don't you reach out to someone"
       ]
     },
     {

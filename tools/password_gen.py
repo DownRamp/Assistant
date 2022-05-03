@@ -73,8 +73,8 @@ def store(reason, password):
     key = gen_string()
     date = datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
     messagebox.showinfo('Secret', f"Please remember your password: {password}")
-    a = db.getDb("Secrets/password.json")
-    b = db.getDb("Secrets/hash.json")
+    a = db.getDb("../Secrets/password.json")
+    b = db.getDb("../Secrets/hash.json")
 
     encMessage, key = encrypt(password, key)
     a.add({"reason": reason, "date": date, "password": encMessage})
@@ -83,9 +83,9 @@ def store(reason, password):
 
 def retrieve(reason):
     query = {"reason": reason}
-    a = db.getDb("Secrets/password.json")
+    a = db.getDb("../Secrets/password.json")
     hash = a.getByQuery(query=query)
-    b = db.getDb("Secrets/hash.json")
+    b = db.getDb("../Secrets/hash.json")
 
     key = b.getByQuery(query=query)
 
@@ -140,10 +140,7 @@ def decrypt(password, key):
     return decPass[0:real]
 
 
-def main():
-    root = Tk()
-    root.title("Times")
-    root.geometry("350x200")
+def main(root):
     lbl1 = Label(root, text="Enter length of password: ")
     lbl1.pack()
     enteryPassLen = Entry(root, width=30)
@@ -153,11 +150,15 @@ def main():
     lbl2.pack()
     enteryReason = Entry(root, width=30)
     enteryReason.pack()
-    btn = Button(root, text="Enter", command=lambda:password(int(enteryPassLen.get()), enteryReason.get()))
+    btn = Button(root, text="Enter", command=lambda: password(int(enteryPassLen.get()), enteryReason.get()))
     btn.pack()
     root.mainloop()
 
+
 if __name__ == '__main__':
-    main()
+    root = Tk()
+    root.title("Times")
+    root.geometry("350x200")
+    main(root)
     # password(10, "test")
     # retrieve("test")

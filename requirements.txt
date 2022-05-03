@@ -6,3 +6,5 @@ requests
 tweepy
 numpy
 py-bcrypt
+torch
+numpy

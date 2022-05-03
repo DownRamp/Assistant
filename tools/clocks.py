@@ -2,6 +2,10 @@ import time
 import datetime
 import tkinter as tk
 from tkinter import *
+import beepy as beep
+
+frequency = 2500
+duration = 1000
 
 pomodoro_state = ""
 pomodoro_time = ""
@@ -10,7 +14,8 @@ day_time = ""
 curr = 0
 t = 0
 
-class Pomodoro():
+
+class Pomodoro:
     def __init__(self, master):
         global pomodoro_time, pomodoro_state
         pomodoro_time = tk.StringVar()
@@ -38,8 +43,10 @@ class Pomodoro():
             root.update()
             time.sleep(1)
         pomodoro_time.set("END")
+        beep.beep(1)
 
-class Day():
+
+class Day:
     def __init__(self, master):
         global day_time
         day_time = tk.StringVar()

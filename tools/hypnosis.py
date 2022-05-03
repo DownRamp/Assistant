@@ -40,6 +40,17 @@ def record():
     write('output.wav', fs, myrecording)
 
 
+def main():
+    instructions()
+    selection = input("Input selection: ")
+    repeats = input("Amount of repeats: ")
+    try:
+        play_song(int(selection), int(repeats))
+    except:
+        print("Incorrect input caused error")
+        sys.exit
+
+
 if __name__ == '__main__':
     instructions()
     selection = input("Input selection: ")

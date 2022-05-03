@@ -3,14 +3,9 @@ from pathlib import Path
 from tkinter import *
 from pysondb import db
 from datetime import date
-import os
 
-import email
-import password_gen
-import clocks
-import affirmation
-
-#os.system("streamlit run investing.py")
+from Assistant.tools import affirmation, clocks, cold_storage, daily_check, password_gen, email_sender, reader
+    # hypnosis, chat
 
 
 class Assistant:
@@ -40,6 +35,10 @@ class Assistant:
         return build_list
 
     @staticmethod
+    def update_event():
+        print()
+
+    @staticmethod
     def add_event(action):
         today = date.today()
         day = today.strftime("%b-%d-%Y")
@@ -51,6 +50,11 @@ class Assistant:
     @staticmethod
     def check_chores():
         chores = []
+        # Filter through each one and pick relevent data
+        # Day
+        # Week
+        # Month
+        # Quarter
         logging.debug("Events checked")
         chores.append(db.getDb("Chores/daily.json").getAll())
         chores.append(db.getDb("Chores/weekly.json").getAll())
@@ -61,7 +65,7 @@ class Assistant:
 
     @staticmethod
     def send_email():
-        email.email()
+        email_sender.email()
 
     @staticmethod
     def create_google_event():
@@ -72,96 +76,51 @@ class Assistant:
         logging.debug("Google calendar event created")
 
     @staticmethod
-    def find_file(name, path):
-        logging.debug("Looking for file")
-        for root, dirs, files in os.walk(path):
-            if name in files:
-                return os.path.join(root, name)
-
-    # Additional features
-
-    # 1
-    # Put into store folder, then input new location
-    @staticmethod
-    def store():
-        # cold storage chapter
-        logging.debug("Storing file")
-
-    # 4
-    @staticmethod
-    def clocks():
-        clocks.main()
-
-    # 5
-    @staticmethod
-    def hypnosis():
-        print()
-
-    # 6
-    @staticmethod
     def ebook_reader():
-        print()
-
-    # 9
-    @staticmethod
-    def password_gen():
-        password_gen.password()
-
-    # 10
-    @staticmethod
-    def therapy():
-        print()
-
-    def check_in(self):
-        # Show title
-        # Show list
-        # Add a entry
-        # Add button
-        print()
+        audio = reader.EbookToAudio()
+        audio.main()
 
     @staticmethod
-    def main(person):
+    def main(root, person):
         greeting = "Hello " + person
 
         # Day's events
         list_events = Assistant.check_events()
-
-        root = Tk()
-        root.title("Assistant")
-        root.geometry("380x120")
+        print(list_events)
         frm = Frame(root)
         frm.grid()
+
         Label(frm, text=greeting).grid(column=1, row=0)
-        Button(frm, text="Update events", command=lambda: Assistant.add_event()).grid(column=0, row=2)
-        Button(frm, text="Talk to HR", command=lambda: Assistant.add_event()).grid(column=1, row=2)
-        Button(frm, text="Update To-Do list", command=lambda: Assistant.add_event()).grid(column=2, row=2)
-        Button(frm, text="Clocks", command=lambda: Assistant.add_event()).grid(column=0, row=3)
-        Button(frm, text="Reader", command=lambda: Assistant.add_event()).grid(column=2, row=3)
-        Button(frm, text="Quit", command=root.destroy).grid(column=1, row=4)
+        Button(frm, text="Add events", command=lambda: Assistant.add_event(Toplevel(root))).grid(column=0, row=2)
+        Button(frm, text="Update events", command=lambda: Assistant.update_event(Toplevel(root))).grid(column=1, row=2)
+        Button(frm, text="Add To-Do list", command=lambda: daily_check.add_todo(Toplevel(root))).grid(column=2, row=2)
+        Button(frm, text="Update To-Do list", command=lambda: daily_check.update_todo(Toplevel(root))).grid(column=3, row=2)
+        Button(frm, text="Clocks", command=lambda: clocks.MainWindow(Toplevel(root))).grid(column=0, row=3)
+        Button(frm, text="Password generator", command=lambda: password_gen.password(Toplevel(root))).grid(column=1, row=3)
+        Button(frm, text="Reader", command=lambda: Assistant.ebook_reader(Toplevel(root))).grid(column=2, row=3)
+        # Button(frm, text="Hypnosis", command=lambda: hypnosis.main(Toplevel(root))).grid(column=0, row=4)
+        Button(frm, text="Search", command=lambda: cold_storage.search(Toplevel(root))).grid(column=1, row=4)
+        # Button(frm, text="Talk to HR", command=lambda: chat.main(Toplevel(root))).grid(column=2, row=4)
+
+        Button(frm, text="Quit", command=root.destroy).grid(column=1, row=5)
         list_items = StringVar(value=list_events)
-        Listbox(frm, listvariable=list_items, height=len(list_events))
+        Listbox(frm, listvariable=list_items, height=len(list_events)).grid(column=1, row=7)
         root.mainloop()
 
 
-
-def daily_check():
-    print()
-
-
 if __name__ == "__main__":
-    assistant = Assistant()
-    boss = assistant.initialize()
+    # start day
+    affirmation.affirm()
+    root = Tk()
+    root.title("Assistant")
+    root.geometry("600x400")
     # Daily check-in
-
-    # affirmations (questions to start the day)
-    # affirmation.affirm()
-    # 1 (high quality, high work)
-    # 2 (low quality, high work)
-    # lunch
-    # 3 (low quality, low work)
-    # 4 (high quality, low work)
-
-    # add cold storage
-    assistant.store()
-
-    assistant.main(boss)
+    daily_check.day_plan(Toplevel(root))
+    # start assistant
+    assistant = Assistant()
+    # Boss name check
+    boss = assistant.initialize()
+    # Run cold storage check
+    cold_storage.freezer()
+    # Start main functions
+    assistant.main(root, boss)

@@ -6,7 +6,7 @@ questions = ["Why are you working so hard?",
              "What is your dream?",
              "What are you grateful for?",
              "How will you work towards your goals today?",
-             "Am are you proud of yourself?",
+             "How are you proud of yourself?",
              "Will you be proud of yourself?"]
 
 
