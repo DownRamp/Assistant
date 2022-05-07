@@ -41,7 +41,7 @@ def update_todo(root):
     # add suggestions here
     Label(frame, text="List of todos", font=('Aerial 12')).grid(row=4)
     # fetch to-do list
-    todo = db.getDb("../ToDo/todo.json")
+    todo = db.getDb("ToDo/todo.json")
     todo_list = todo.getAll()
     for i, item in enumerate(todo_list):
         w = Text(frame, width=15, height=2)

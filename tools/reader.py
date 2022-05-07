@@ -5,6 +5,8 @@ import pyttsx3
 from tkinter import *
 import PyPDF2
 import threading
+import os
+import tkinter.messagebox
 
 # https://www.samuelthomasdavies.com/book-summaries/
 
@@ -19,18 +21,19 @@ class EbookToAudio:
     @staticmethod
     def pick_book(root):
         frame = Frame(root)
-        list_events = glob.glob("/Books/*")
+        frame.grid()
+        list_events = glob.glob("Books/*")
         list_items = StringVar(value=list_events)
         listing = Listbox(frame, listvariable=list_items, height=len(list_events))
-        listing.pack()
-        Button(frame, text="Select", command=lambda: EbookToAudio.selection(root, listing.get(listing.curselection())))
-        frame.pack()
+        listing.grid(row=1)
+        Button(frame, text="Select", command=lambda: EbookToAudio.selection(root, listing.get(listing.curselection())))\
+            .grid(row=5)
 
     @staticmethod
     def selection(main, book):
         global book_selection
         book_selection = book
-        main.quit()
+        tkinter.messagebox.showinfo("Selection made", "Selection Made")
 
     # turn pdf to readable
     @staticmethod
@@ -63,23 +66,21 @@ class EbookToAudio:
     @staticmethod
     def fetch_bookmark(filename):
         try:
-            with open(filename) as f:
-                return f.read()
+            if os.path.exists(filename):
+                with open(filename) as f:
+                    return f.read()
+            return ''
         except IOError:
             return ''
 
     @staticmethod
     def window(root):
         frame = Frame(root)
-        label = Label(text="Read a book")
-        label.pack()
-        book = Button(root, text="Pick a book", command=lambda: EbookToAudio.pick_book(Toplevel(root)))
-        book.pack()
-        start = Button(root, text="Start", command=lambda: threading.Thread(target=EbookToAudio.main))
-        start.pack()
-        stop = Button(root, text="Stop", command=lambda: threading.Thread(target=EbookToAudio.stop))
-        stop.pack()
-        frame.pack()
+        frame.grid()
+        Label(frame, text="Read a book").grid(row=1)
+        Button(frame, text="Pick a book", command=lambda: EbookToAudio.pick_book(Toplevel(root))).grid(row=3)
+        Button(frame, text="Start", command=lambda: threading.Thread(target=EbookToAudio.main).start()).grid(row=4)
+        Button(frame, text="Stop", command=lambda: threading.Thread(target=EbookToAudio.stop).start()).grid(row=5)
 
     # main
     @staticmethod
@@ -95,9 +96,8 @@ class EbookToAudio:
         engine.runAndWait()
         # for picking book feature later
         # book = pick_book()
-        book = f"/books/{book_selection}"
         # fetch any saved points
-        bookmark_file = f"/bookmarks/{book_selection}"
+        bookmark_file = f"/Bookmarks/{book_selection}"
         bookmark = EbookToAudio.fetch_bookmark(bookmark_file)
         if bookmark == '':
             bookmark_value = 0
@@ -112,7 +112,7 @@ class EbookToAudio:
                 else:
                     EbookToAudio.save_point(bookmark_file, i)
         else:
-            file_reader = EbookToAudio.pdf_to_read(book)
+            file_reader = EbookToAudio.pdf_to_read(book_selection)
             # start reading from point
             for i in range(bookmark_value, file_reader.numPages):
                 engine.say(file_reader.pages[i].extractText())
