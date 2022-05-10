@@ -2,22 +2,22 @@
    "data": [
       {
          "name": "vacuum vents",
-         "time": "Weekend 1",
+         "time": 0,
          "id": 298848286854024913
       },
       {
          "name": "dust blinds",
-         "time": "Weekend 2",
+         "time": 1,
          "id": 185003461997217660
       },
       {
          "name": "clean dishwasher and laundry machines",
-         "time": "Weekend 3",
+         "time": 2,
          "id": 277798878330014324
       },
       {
          "name": "dust and clean lights",
-         "time": "Weekend 4",
+         "time": 3,
          "id": 522476730791483506
       }
    ]

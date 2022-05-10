@@ -43,7 +43,7 @@ def freezer():
             cold = db.getDb("Filing_System/cold.json")
             cold.add({"path": file})
             shutil.move(file, "Filing_System/Freezer"+os.path.basename(file))
-            shutil.make_archive("Filing_System/Freezer", 'zip', "../Filing_System/Freezer")
+            shutil.make_archive("Filing_System/Freezer", 'zip', "Filing_System/Freezer")
 
 
 def thaw(name):

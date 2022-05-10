@@ -2,37 +2,37 @@
    "data": [
       {
          "name": "mop kitchen and bathroom floors",
-         "time": "Monday",
+         "time": 0,
          "id": 325461116464132366
       },
       {
          "name": "change bedding",
-         "time": "Tuesday",
+         "time": 1,
          "id": 313703396390216171
       },
       {
          "name": "toss expired food",
-         "time": "Wednesday",
+         "time": 2,
          "id": 326329247694814399
       },
       {
          "name": "wipe down kitchen appliances",
-         "time": "Thursday",
+         "time": 3,
          "id": 602138949955373608
       },
       {
          "name": "clean microwave",
-         "time": "Friday",
+         "time": 4,
          "id": 545408387085149867
       },
       {
          "name": "vacuum",
-         "time": "Saturday",
+         "time": 5,
          "id": 309426070392030747
       },
       {
          "name": "clean mirrors",
-         "time": "Sunday",
+         "time": 6,
          "id": 109337575281957341
       }
    ]
