@@ -5,9 +5,34 @@ import torch
 
 from model import NeuralNet
 from nltk_utils import bag_of_words, tokenize
+from Tkinter import *
 
+def window():
+    window = Tk()
 
-def main(root):
+    messages = Text(window)
+    messages.pack()
+
+    input_user = StringVar()
+    input_field = Entry(window, text=input_user)
+    input_field.pack(side=BOTTOM, fill=X)
+
+    def Enter_pressed(event):
+        input_get = input_field.get()
+        print(input_get)
+        messages.insert(INSERT, '%s\n' % input_get)
+        # label = Label(window, text=input_get)
+        input_user.set('')
+        # label.pack()
+        return "break"
+
+    frame = Frame(window)  # , width=300, height=300)
+    input_field.bind("<Return>", Enter_pressed)
+    frame.pack()
+
+    window.mainloop()
+
+def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     with open('intents.json', 'r') as json_data:
@@ -53,3 +78,7 @@ def main(root):
                     print(f"{bot_name}: {random.choice(intent['responses'])}")
         else:
             print(f"{bot_name}: I do not understand...")
+
+if __name__ == '__main__':
+    window()
+#     main()
