@@ -108,7 +108,7 @@ class Assistant:
         customtkinter.CTkButton(master=frm, text="Password generator", command=lambda: password_gen.main(tkinter.Toplevel(root))).grid(column=1, row=3, padx=20, pady=20, sticky="nsew")
         customtkinter.CTkButton(master=frm, text="Reader", command=lambda: Assistant.ebook_reader(tkinter.Toplevel(root))).grid(column=2, row=3, padx=20, pady=20, sticky="nsew")
         # customtkinter.CTkButton(master=frm, text="Hypnosis", command=lambda: hypnosis.main(tkinter.Toplevel(root))).grid(column=0, row=4, padx=20, pady=20, sticky="nsew")
-        customtkinter.CTkButton(master=frm, text="Search", command=lambda: cold_storage.search(tkinter.Toplevel(root))).grid(column=1, row=4, padx=20, pady=20, sticky="nsew")
+        customtkinter.CTkButton(master=frm, text="Search", command=lambda: cold_storage.window(tkinter.Toplevel(root))).grid(column=1, row=4, padx=20, pady=20, sticky="nsew")
         # customtkinter.CTkButton(master=frm, text="Talk to HR", command=lambda: chat.main(tkinter.Toplevel(root))).grid(column=2, row=4, padx=20, pady=20, sticky="nsew")
 
 
@@ -146,7 +146,7 @@ class Assistant:
 
 
 if __name__ == "__main__":
-#     daily_check.delete_plan()
+    daily_check.delete_plan()
     # start day
     # affirmation.affirm()
     root = customtkinter.CTk()

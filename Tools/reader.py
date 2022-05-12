@@ -105,6 +105,10 @@ class EbookToAudio:
                     engine.runAndWait()
                 else:
                     self.save_point(bookmark_file, i)
+            # archive book
+            path = book_selection[:6]+"Done/"+book_selection[6:]
+            os.rename(book_selection, "path/to/new/destination/for/file.foo")
+
 #         else:
 #             file_reader = self.pdf_to_read(book_selection)
 #             # start reading from point

@@ -2,25 +2,11 @@ import sounddevice as sd
 import soundfile as sf
 import sys
 from scipy.io.wavfile import write
+import glob
+import tkinter.messagebox
 
 
-def instructions():
-    print("Music selection:")
-    print("1 - Flowing Stream")
-    print("2 - Lake noises")
-
-
-def play_song(selection, repeats):
-    filename1 = "music/Flowing-Stream-1.wav"
-    filename2 = "music/St-Marys-Loch.wav"
-    filename = ""
-    if(selection == 1):
-        filename = filename1
-    elif(selection == 2):
-        filename = filename2
-    else:
-        print("Currently unavailble")
-        sys.exit
+def play_song(filename, repeats):
     data, fs = sf.read(filename, dtype='float32') 
     count = 0
 
@@ -29,7 +15,7 @@ def play_song(selection, repeats):
         sd.wait()
         count+=1
 
-    print("End of track")
+    tkinter.messagebox.showinfo("End Of Track",  "End Of Track")
 
 
 def record():
@@ -40,19 +26,29 @@ def record():
     write('output.wav', fs, myrecording)
 
 
-def main():
-    instructions()
-    selection = input("Input selection: ")
-    repeats = input("Amount of repeats: ")
-    try:
-        play_song(int(selection), int(repeats))
-    except:
-        print("Incorrect input caused error")
-        sys.exit
+def window(main):
+    frame = Frame(main)
+    frame.grid()
+    # Song selection
+    list_songs = glob.glob("Music/*")
+    list_items = StringVar(value=list_songs)
+    listing = Listbox(frame, listvariable=list_items, height=len(list_songs))
+    listing.grid(row=1)
 
+    # record button
+    Button(frame, text="Record Internal Message", command=lambda: record())\
+        .grid(row=5)
+
+    # enter repeats
+    Label(frame, text="Enter number of repeats for music", font=('Aerial 12')).grid(row=6)
+    ent = Entry(frame)
+    ent.grid(row=7)
+
+    # play
+    Button(frame, text="Play", command=lambda: play_song(listing.get(listing.curselection()), ent.get())\
+        .grid(row=8)
 
 if __name__ == '__main__':
-    instructions()
     selection = input("Input selection: ")
     repeats = input("Amount of repeats: ")
     try:

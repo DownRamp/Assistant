@@ -6,18 +6,17 @@ import pysondb as db
 
 
 def start_search(name):
-    listOfFiles = search("/Boss")
+    listOfFiles = search("/Filing_System")
     for file in listOfFiles:
         if name in file:
             return file
-    else:
-        # check cold
-        with gzip.open('/Boss/cold.txt.gz', 'rb') as f:
-            file_content = f.read()
-            for file in file_content:
-                if name in file:
-                    thaw(file)
-                    return file
+
+    cold = db.getDb("/Filing_System/cold.json")
+    cold_list = cold.getAll()
+    for item in cold_list:
+        if name in item["path"]:
+            thaw(item["path"])
+            return item["path"]
 
 
 def search(dirName):
@@ -48,9 +47,26 @@ def freezer():
 
 def thaw(name):
     # Grab requested file
-    # get file path
+    cold = db.getDb("Filing_System/cold.json")
+    cold_list = cold.getAll()
+    for item in cold_list:
+        if name == item["path"]:
+            cold.deleteById(pk=item["id"])
+            break
+
+    if os.path.exists("Filing_System/Freezer.zip"):
+        shutil.unpack_archive("Filing_System/Freezer.zip")
     # return to path and move back to path
-    print()
+    shutil.move("Filing_System/Freezer"+os.path.basename(file), file)
+
+
+def window(main):
+    frame = Frame(main)
+    frame.grid()
+    Label(frame, text="Search", font=('Aerial 12')).grid(row=1, column =0)
+    ent1 = Entry(frame)
+    ent1.grid(row=1, column=1)
+    Button(frame, text='Enter', width=25, command=lambda: start_search(ent1.get())).grid(row=1, column=2)
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 import tkinter.messagebox
 from tkinter import *
 from pysondb import db
+import datetime
 
 
 # add to to-do
@@ -96,12 +97,13 @@ def save_task(task, quad):
 
 def save_plan(ent1, ent2, ent3, ent4):
     # save to db
+    date = datetime.datetime.now().strftime("%m/%d/%Y")
     todo = db.getDb("ToDo/daily.json")
     new_items = [
-        {"task": ent1, "quad": 1},
-        {"task": ent2, "quad": 2},
-        {"task": ent3, "quad": 3},
-        {"task": ent4, "quad": 4},
+        {"task": ent1, "quad": 1, "date": date},
+        {"task": ent2, "quad": 2, "date": date},
+        {"task": ent3, "quad": 3, "date": date},
+        {"task": ent4, "quad": 4, "date": date},
     ]
 
     todo.addMany(new_items)
@@ -110,7 +112,10 @@ def save_plan(ent1, ent2, ent3, ent4):
 
 def delete_plan():
     todo = db.getDb("ToDo/daily.json")
-    todo.deleteAll()
+    date = datetime.datetime.now().strftime("%m/%d/%Y")
+    for i in todo.getAll():
+        if i["date"] != date
+            todo.deleteById(pk=i["id"])
 
 
 if __name__ == "__main__":
