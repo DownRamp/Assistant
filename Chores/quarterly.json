@@ -1,0 +1,49 @@
+{
+   "data": [
+      {
+         "name": "wipe down fridge",
+         "time": 0,
+         "id": 252034791034576456
+      },
+      {
+         "name": "wash pillows and comforters",
+         "time": 0,
+         "id": 291147599715472544
+      },
+      {
+         "name": "vacuum mattress",
+         "time": 0,
+         "id": 122992056094523507
+      },
+      {
+         "name": "wash shower curtain",
+         "time": 1,
+         "id": 152243100126092719
+      },
+      {
+         "name": "freshen drains",
+         "time": 1,
+         "id": 240109470021941869
+      },
+      {
+         "name": "clean inside oven",
+         "time": 1,
+         "id": 879579747345457281
+      },
+      {
+         "name": "clean out freezer",
+         "time": 2,
+         "id": 312243174563851067
+      },
+      {
+         "name": "clean under furniture",
+         "time": 2,
+         "id": 486923057877063746
+      },
+      {
+         "name": "clean furniture surface",
+         "time": 2,
+         "id": 928363774743625176
+      }
+   ]
+}

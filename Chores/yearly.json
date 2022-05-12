@@ -1,0 +1,34 @@
+{
+   "data": [
+      {
+         "name": "clear out gutters",
+         "time": "0",
+         "id": 838873542307061098
+      },
+      {
+         "name": "clean drapes and curtains",
+         "time": "1",
+         "id": 307215992383667394
+      },
+      {
+         "name": "clean around dryer and vents",
+         "time": "2",
+         "id": 179344189967121719
+      },
+      {
+         "name": "clean chimney",
+         "time": "2",
+         "id": 205776438638407354
+      },
+      {
+         "name": "deep clean carpet",
+         "time": "3",
+         "id": 145835700852694917
+      },
+      {
+         "name": "deep clean windows",
+         "time": "3",
+         "id": 199898171873148408
+      }
+   ]
+}

@@ -1,0 +1,24 @@
+{
+   "data": [
+      {
+         "name": "vacuum vents",
+         "time": 0,
+         "id": 298848286854024913
+      },
+      {
+         "name": "dust blinds",
+         "time": 1,
+         "id": 185003461997217660
+      },
+      {
+         "name": "clean dishwasher and laundry machines",
+         "time": 2,
+         "id": 277798878330014324
+      },
+      {
+         "name": "dust and clean lights",
+         "time": 3,
+         "id": 522476730791483506
+      }
+   ]
+}

@@ -1,0 +1,13 @@
+streamlit
+pandas
+plotly
+psycopg2
+requests
+tweepy
+numpy
+py-bcrypt
+torch
+numpy
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
