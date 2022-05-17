@@ -5,6 +5,7 @@ from pysondb import db
 from datetime import date
 from datetime import datetime
 import customtkinter
+import filemanager
 
 from Tools import events, affirmation, clocks, cold_storage, daily_check, password_gen, email_sender, reader
     # hypnosis, chat
@@ -147,6 +148,7 @@ class Assistant:
 
 if __name__ == "__main__":
     daily_check.delete_plan()
+    filemanager.MoverHandler()
     # start day
     # affirmation.affirm()
     root = customtkinter.CTk()
