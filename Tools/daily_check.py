@@ -114,7 +114,7 @@ def delete_plan():
     todo = db.getDb("ToDo/daily.json")
     date = datetime.datetime.now().strftime("%m/%d/%Y")
     for i in todo.getAll():
-        if i["date"] != date
+        if i["date"] != date:
             todo.deleteById(pk=i["id"])
 
 
