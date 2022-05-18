@@ -60,7 +60,7 @@ class MoverHandler:
                 elif name.endswith('.zip') or name.endswith('.tar') or name.endswith('.7zip'):
                     dest = dest_dir_zip
                     move(dest, entry, name)
-                elif name.endswith('.xlsx') ):
+                elif name.endswith('.xlsx'):
                     dest = dest_dir_excel
                     move(dest, entry, name)
 

@@ -3,16 +3,17 @@ import json
 
 import torch
 
-from model import NeuralNet
-from nltk_utils import bag_of_words, tokenize
-from Tkinter import *
+from Tools.model import NeuralNet
+from Tools.nltk_utils import bag_of_words, tokenize
+import tkinter as tk
+from tkinter import *
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-with open('intents.json', 'r') as json_data:
+with open('Tools/intents.json', 'r') as json_data:
     intents = json.load(json_data)
 
-FILE = "Chats/chat.txt"
+FILE = "Tools/Chats/chat.txt"
 data = torch.load(FILE)
 
 input_size = data["input_size"]
@@ -28,63 +29,66 @@ model.eval()
 
 bot_name = "HR"
 
-def window():
-    window = Tk()
+class window:
+    def __init__(self, root):
+        self.root = root
+        self.root.geometry("600x400")
+        self.frm = tk.Frame(root)
+        self.frm.pack()
+        self.messages = Text(self.root)
+        self.messages.pack()
 
-    messages = Text(window)
-    messages.pack()
+        self.input_user = StringVar()
+        self.input_field = Entry(self.root, text=self.input_user)
+        self.input_field.pack(side=BOTTOM, fill=X)
 
-    input_user = StringVar()
-    input_field = Entry(window, text=input_user)
-    input_field.pack(side=BOTTOM, fill=X)
+        # initial
+        self.input_get = "Let's chat"
+        self.messages.insert(INSERT, '%s\n' % self.input_get)
+        self.input_user.set('')
+        self.input_field.bind("<Return>", self.Enter_pressed)
 
-    # initial
-    input_get = "Let's chat"
-    messages.insert(INSERT, '%s\n' % input_get)
-    input_user.set('')
-
-    def Enter_pressed(event):
-        input_get = input_field.get()
-        messages.insert(INSERT, '%s\n' % input_get)
-        # label = Label(window, text=input_get)
-        input_user.set('')
-        hr = main(sentence)
-        messages.insert(INSERT, '%s\n' % hr)
-        input_user.set('')
+    def Enter_pressed(self, event):
+        self.input_get = self.input_field.get()
+        self.messages.insert(INSERT, '%s\n' % self.input_get)
+        # label = Label(root, text=input_get)
+        self.input_user.set('')
+        self.hr = self.main(self.input_get)
+        self.messages.insert(INSERT, '%s\n' % self.hr)
+        self.input_user.set('')
 
         # label.pack()
         return "break"
 
-    frame = Frame(window)  # , width=300, height=300)
-    input_field.bind("<Return>", Enter_pressed)
-    frame.pack()
+    def main(self, sentence):
+        # sentence = "do you use credit cards?"
+        if sentence == "quit":
+            return ""
 
-    window.mainloop()
+        sentence = tokenize(sentence)
+        X = bag_of_words(sentence, all_words)
+        X = X.reshape(1, X.shape[0])
+        X = torch.from_numpy(X).to(device)
 
-def main(sentence):
-    # sentence = "do you use credit cards?"
-    if sentence == "quit":
-        return ""
+        output = model(X)
+        _, predicted = torch.max(output, dim=1)
 
-    sentence = tokenize(sentence)
-    X = bag_of_words(sentence, all_words)
-    X = X.reshape(1, X.shape[0])
-    X = torch.from_numpy(X).to(device)
+        tag = tags[predicted.item()]
 
-    output = model(X)
-    _, predicted = torch.max(output, dim=1)
-
-    tag = tags[predicted.item()]
-
-    probs = torch.softmax(output, dim=1)
-    prob = probs[0][predicted.item()]
-    if prob.item() > 0.75:
-        for intent in intents['intents']:
-            if tag == intent["tag"]:
-                return(f"{bot_name}: {random.choice(intent['responses'])}")
-    else:
-        return(f"{bot_name}: I do not understand...")
+        probs = torch.softmax(output, dim=1)
+        prob = probs[0][predicted.item()]
+        if prob.item() > 0.75:
+            for intent in intents['intents']:
+                if tag == intent["tag"]:
+                    return(f"{bot_name}: {random.choice(intent['responses'])}")
+        else:
+            return(f"{bot_name}: I do not understand...")
 
 if __name__ == '__main__':
-    window()
+    root = Tk()
+    root.title("Times")
+    root.geometry("1000x700")
+    window(root)
+    root.mainloop()
+
 #     main()
