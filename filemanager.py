@@ -37,7 +37,7 @@ def move(dest, entry, name):
 
 #class MoverHandler(FileSystemEventHandler):
 class MoverHandler:
-    def on_modified(self, event):
+    def activate(self):
         with os.scandir(source_dir) as entries:
             for entry in entries:
                 name = entry.name
@@ -69,7 +69,7 @@ if __name__ == "__main__":
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
     path = source_dir
-    event_handler = MoverHandler()
+    MoverHandler().activate()
 
     #observer = Observer()
     #observer.schedule(event_handler, path, recursive=True)
