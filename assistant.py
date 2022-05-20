@@ -165,7 +165,7 @@ class Assistant:
 
 if __name__ == "__main__":
     daily_check.delete_plan()
-    filemanager.MoverHandler()
+    filemanager.MoverHandler().activate()
     # start day
     # affirmation.affirm()
     root = customtkinter.CTk()
