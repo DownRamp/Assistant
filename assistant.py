@@ -116,7 +116,6 @@ class Assistant:
         # customtkinter.CTkButton(master=frm, text="Search", command=lambda: cold_storage.window(tkinter.Toplevel(root))).grid(column=1, row=4, padx=20, pady=20, sticky="nsew")
         customtkinter.CTkButton(master=frm, text="Talk to HR", command=lambda: chat.window(tkinter.Toplevel(root))).grid(column=3, row=3, padx=20, pady=20, sticky="nsew")
 
-
         customtkinter.CTkButton(master=frm, text="Quit", fg_color=("gray75", "gray30"), command=root.destroy).grid(column=1, row=5, padx=20, pady=20, sticky="nsew")
         customtkinter.CTkButton(master=frm, text="Refresh", fg_color=("gray75", "gray30"), command=lambda: self.refresh(root, boss, goals, frm)).grid(column=2, row=5, padx=20, pady=20, sticky="nsew")
 

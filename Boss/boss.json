@@ -2,7 +2,14 @@
    "data": [
       {
          "name": "Daniel",
-         "id": 157441623770862350
+         "goals": [
+            "Retire early",
+            "Calisthenics skills",
+            "Good relationship",
+            "Start a business",
+            "Learn to upscale clothes"
+         ],
+         "id": 164856840204906636
       }
    ]
 }

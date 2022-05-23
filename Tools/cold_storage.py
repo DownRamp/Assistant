@@ -41,7 +41,7 @@ def freezer():
             # save path location on file for putting back
             cold = db.getDb("Filing_System/cold.json")
             cold.add({"path": file})
-            shutil.move(file, "Filing_System/Freezer"+os.path.basename(file))
+            shutil.move(file, "Filing_System/Freezer/"+os.path.basename(file))
             shutil.make_archive("Filing_System/Freezer", 'zip', "Filing_System/Freezer")
 
 
