@@ -8,7 +8,7 @@ import customtkinter
 import filemanager
 
 from Tools import events, affirmation, clocks, cold_storage, daily_check, password_gen, email_sender, reader, chat
-    # hypnosis, chat
+    # hypnosis
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -112,8 +112,6 @@ class Assistant:
         customtkinter.CTkButton(master=frm, text="Clocks", command=lambda: clocks.MainWindow(tkinter.Toplevel(root))).grid(column=0, row=3, padx=20, pady=20, sticky="nsew")
         customtkinter.CTkButton(master=frm, text="Password generator", command=lambda: password_gen.main(tkinter.Toplevel(root))).grid(column=1, row=3, padx=20, pady=20, sticky="nsew")
         customtkinter.CTkButton(master=frm, text="Reader", command=lambda: self.ebook_reader(tkinter.Toplevel(root))).grid(column=2, row=3, padx=20, pady=20, sticky="nsew")
-        # customtkinter.CTkButton(master=frm, text="Hypnosis", command=lambda: hypnosis.main(tkinter.Toplevel(root))).grid(column=0, row=4, padx=20, pady=20, sticky="nsew")
-        # customtkinter.CTkButton(master=frm, text="Search", command=lambda: cold_storage.window(tkinter.Toplevel(root))).grid(column=1, row=4, padx=20, pady=20, sticky="nsew")
         customtkinter.CTkButton(master=frm, text="Talk to HR", command=lambda: chat.window(tkinter.Toplevel(root))).grid(column=3, row=3, padx=20, pady=20, sticky="nsew")
 
         customtkinter.CTkButton(master=frm, text="Quit", fg_color=("gray75", "gray30"), command=root.destroy).grid(column=1, row=5, padx=20, pady=20, sticky="nsew")

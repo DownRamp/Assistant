@@ -8,7 +8,6 @@ import threading
 import os
 import tkinter.messagebox
 
-# https://www.samuelthomasdavies.com/book-summaries/
 
 stop_flag = False
 book_selection = ""
@@ -109,15 +108,15 @@ class EbookToAudio:
             path = book_selection[:6]+"Done/"+book_selection[6:]
             os.rename(book_selection, "path/to/new/destination/for/file.foo")
 
-#         else:
-#             file_reader = self.pdf_to_read(book_selection)
-#             # start reading from point
-#             for i in range(bookmark_value, file_reader.numPages):
-#                 engine.say(file_reader.pages[i].extractText())
-#                 engine.runAndWait()
-#                 action = input("Turn page?(y/n)")
-#                 if action == "n":
-#                     self.save_point(bookmark_file, i)
+ #        else:
+ #            file_reader = self.pdf_to_read(book_selection)
+ #            # start reading from point
+ #            for i in range(bookmark_value, file_reader.numPages):
+ #                engine.say(file_reader.pages[i].extractText())
+ #                engine.runAndWait()
+ #                action = input("Turn page?(y/n)")
+ #                if action == "n":
+ #                    self.save_point(bookmark_file, i)
         engine.stop()
 
 
