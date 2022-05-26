@@ -70,13 +70,3 @@ if __name__ == "__main__":
                         datefmt='%Y-%m-%d %H:%M:%S')
     path = source_dir
     MoverHandler().activate()
-
-    #observer = Observer()
-    #observer.schedule(event_handler, path, recursive=True)
-    #observer.start()
-    #try:
-    #    while True:
-    #        time.sleep(10)
-    #except KeyboardInterrupt:
-    #    observer.stop()
-    #observer.join()

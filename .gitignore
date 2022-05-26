@@ -2,8 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
 *.lock
+*/*.lock
+*.json
+*/*.json
 
 # C extensions
 *.so
