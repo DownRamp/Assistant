@@ -1,5 +1,4 @@
 import os
-import gzip
 from datetime import datetime, timedelta
 import shutil
 import pysondb as db
@@ -34,10 +33,12 @@ def freezer():
     for file in files:
         file_stats = os.stat(file)
         last_access = datetime.fromtimestamp(file_stats.st_atime)
-        if last_access < week_time:
+        if last_access > week_time:
             # move to cold storage folder and gzip
             if os.path.exists("Filing_System/Freezer.zip"):
                 shutil.unpack_archive("Filing_System/Freezer.zip")
+            else:
+                 os.mkdir("Filing_System/Freezer")
             # save path location on file for putting back
             cold = db.getDb("Filing_System/cold.json")
             cold.add({"path": file})
@@ -49,13 +50,16 @@ def thaw(name):
     # Grab requested file
     cold = db.getDb("Filing_System/cold.json")
     cold_list = cold.getAll()
+    file = ""
     for item in cold_list:
-        if name == item["path"]:
+        if name in item["path"]:
+            file = item["path"]
             cold.deleteById(pk=item["id"])
             break
 
     if os.path.exists("Filing_System/Freezer.zip"):
         shutil.unpack_archive("Filing_System/Freezer.zip")
+
     # return to path and move back to path
     shutil.move("Filing_System/Freezer"+os.path.basename(file), file)
 

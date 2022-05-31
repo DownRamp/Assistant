@@ -162,7 +162,7 @@ class Assistant:
 
 if __name__ == "__main__":
     daily_check.delete_plan()
-    filemanager.MoverHandler().activate()
+    # filemanager.MoverHandler().activate()
     # start day
     # affirmation.affirm()
     root = customtkinter.CTk()
@@ -175,6 +175,6 @@ if __name__ == "__main__":
     # Boss name check
     boss, goals = assistant.initialize()
     # Run cold storage check
-    cold_storage.freezer()
+    # cold_storage.freezer()
     # Start main functions
     assistant.main(root, boss, goals)

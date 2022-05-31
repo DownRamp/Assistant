@@ -14,7 +14,7 @@ def affirm():
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     # I like this one more (7)
-    engine.setProperty('voice', voices[17].id)
+    engine.setProperty('voice', voices[1].id)
     engine.say("Good Morning!")
     engine.runAndWait()
     for i in questions:
